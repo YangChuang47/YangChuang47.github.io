@@ -46,13 +46,13 @@
     var instructions = {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
-    <p>实验首先在电脑屏幕上呈现一个“+”符号注视点，提醒你开始。</p>
-    <p>接着你会看到一个中文短语，随后看到另一个<strong style="color:red">中文二字词语</strong>。</p>
-    <p>你需要评价<strong style="color:red">后面</strong>看到的中文二字词语是让人感到<strong style="color:red">积极</strong>的还是<strong style="color:red">消极</strong>的，并按下对应按钮。</p>
-    <p>请注意，前面出现的中文短语只是一个信号，提示目标词语即将出现，你只需要评价后面看到的二字词语即可。</p>
-    <p>评价的时候请尽量不要受到前面短语的影响。</p>
+    <p style='font-size: 30px;'>实验首先在电脑屏幕上呈现一个“+”符号注视点，提醒你开始。</p>
+    <p style='font-size: 30px;'>接着你会看到一个中文短语，随后看到另一个<strong style="color:red">中文二字词语</strong>。</p>
+    <p style='font-size: 30px;'>你需要评价<strong style="color:red">后面</strong>看到的中文二字词语是让人感到<strong style="color:red">积极</strong>的还是<strong style="color:red">消极</strong>的，并按下对应按钮。</p>
+    <p style='font-size: 30px;'>请注意，前面出现的中文短语只是一个信号，提示目标词语即将出现，你只需要评价后面看到的二字词语即可。</p>
+    <p style='font-size: 30px;'>评价的时候请尽量不要受到前面短语的影响。</p>
     <p>\n</p>
-    <p>请在仔细阅读上面这段话后开始练习。</p>
+    <p style='font-size: 30px;'>请在仔细阅读上面这段话后开始练习。</p>
   `,
         choices: ['开始练习']
 
@@ -119,7 +119,7 @@
     var instruction2 = {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
-    <p>练习完成。</p>
+    <p style='font-size: 30px;'>练习完成。</p>
 
   `,
         choices: ['正式开始实验']
@@ -229,7 +229,7 @@
     var endinstruction = {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
-    <p>实验结束了，谢谢参与！</p>
+    <p style='font-size: 30px;'>实验结束了，谢谢参与！</p>
 
   `,
         choices: ['结束'],
