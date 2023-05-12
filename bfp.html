@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<head>
+    <title>My experiment</title>
+    <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugin-html-keyboard-response.js"></script>
+    <script src="jspsych/plugin-html-button-response.js"></script>
+    <script src="jspsych/plugin-image-keyboard-response.js"></script>
+    <script src="jspsych/plugin-image-button-response.js"></script>
+    <script src="jspsych/plugin-preload.js"></script>
+    <script src="jspsych/plugin-survey-text.js"></script>
+    <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+</body>
+<script>
+    var jsPsych = initJsPsych({
+        on_finish: function () {
+            jsPsych.data.get().localSave("csv", "data.csv");
+        },
+        default_iti: 250
+    });
+
+    var timeline = [];
+    var soarange = [0, 300]
+    var soatime = 0
+
+    timeline.push({
+        type: jsPsychPreload,
+        auto_preload: true
+    });
+
+    //BFP
+    var instructions = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: `
+    <p>实验首先在电脑屏幕上呈现一个“+”符号注视点，提醒你开始。</p>
+    <p>接着你会看到一个中文短语，随后看到另一个<strong>中文二字词语</strong>。</p>
+    <p>你需要评价<strong>后面</strong>看到的中文二字词语是让人感到<strong>积极</strong>的还是<strong>消极</strong>的，并按下对应按钮。</p>
+    <p>请注意，前面出现的中文短语只是一个信号，提示目标词语即将出现，你只需要评价后面看到的二字词语即可。</p>
+    <p>评价的时候请尽量不要受到前面短语的影响。</p>
+    <p>\n</p>
+    <p>请在仔细阅读上面这段话后开始练习。</p>
+  `,
+        choices: ['开始练习']
+
+    };
+    timeline.push(instructions)
+
+    // practice procesure
+    var prac_timeline_variables = [
+        { v1: '有沙龙', v2: '阴影' },
+        { v1: '有群岛', v2: '灰尘' },
+        { v1: '有玻璃', v2: '傻瓜' },
+        { v1: '有部落', v2: '废话' },
+        { v1: '有行程', v2: '厕所' },
+        { v1: '有纸条', v2: '狐狸' },
+        { v1: '没有光盘', v2: '包袱' },
+        { v1: '没有斧子', v2: '寡妇' },
+        { v1: '没有成人', v2: '衙门' },
+        { v1: '没有行李', v2: '屁股' },
+        { v1: '没有署名', v2: '芙蓉' },
+        { v1: '没有液体', v2: '温泉' },
+        { v1: '不是没有助理', v2: '礼服' },
+        { v1: '不是没有领事', v2: '翅膀' },
+        { v1: '不是没有网址', v2: '钢琴' },
+        { v1: '不是没有窗户', v2: '童话' },
+        { v1: '不是没有泡沫', v2: '宾客' },
+        { v1: '不是没有乌龟', v2: '蝴蝶' },
+    ];
+
+    var pracproc = {
+        timeline_variables: prac_timeline_variables,
+        soatime: soatime,
+        timeline: [
+            {
+                type: jsPsychHtmlKeyboardResponse,
+                choices: "NO_KEYS",
+                stimulus: "<p style='text-align:center; font-size:80px;'>+</p>",
+                trial_duration: 500
+            },
+            {
+                type: jsPsychImageKeyboardResponse,
+                choices: "NO_KEYS",
+                stimulus: 'blanck/blanck.png',
+                trial_duration: 200
+            },
+            {
+                //triger0
+                type: jsPsychHtmlKeyboardResponse,
+                choices: "NO_KEYS",
+                stimulus: jsPsych.timelineVariable('v1'),
+                trial_duration: 200
+            },
+            {
+                //target0
+                type: jsPsychHtmlButtonResponse,
+                choices: ['消极', '积极'],
+                stimulus: jsPsych.timelineVariable('v2'),
+            }
+        ],
+        randomize_order: true,
+        repetitions: 1
+    };
+    timeline.push(pracproc)
+
+    var instruction2 = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: `
+    <p>练习完成。</p>
+
+  `,
+        choices: ['正式开始实验']
+
+    };
+    timeline.push(instruction2)
+
+    //testlist
+    var test_timeline_variables = [
+        { v1: '有军士', v2: '炸弹' },
+        { v1: '有球迷', v2: '盗版' },
+        { v1: '有名字', v2: '炸药' },
+        { v1: '有标本', v2: '深渊' },
+        { v1: '有家具', v2: '炮火' },
+        { v1: '有外国', v2: '官司' },
+        { v1: '有酒厂', v2: '战场' },
+        { v1: '有售价', v2: '手枪' },
+        { v1: '有炮台', v2: '弹药' },
+        { v1: '有门票', v2: '情妇' },
+        { v1: '有声音', v2: '情人' },
+        { v1: '有帽子', v2: '热点' },
+        { v1: '有女仆', v2: '雄心' },
+        { v1: '有商行', v2: '领袖' },
+        { v1: '有外语', v2: '真相' },
+        { v1: '有领地', v2: '国旗' },
+        { v1: '有隧道', v2: '宝座' },
+        { v1: '有护士', v2: '晚会' },
+        { v1: '有键盘', v2: '信念' },
+        { v1: '有买主', v2: '国歌' },
+        { v1: '没有器械', v2: '牲畜' },
+        { v1: '没有帮主', v2: '行踪' },
+        { v1: '没有理事', v2: '苦心' },
+        { v1: '没有林中', v2: '行径' },
+        { v1: '没有宫廷', v2: '差异' },
+        { v1: '没有山地', v2: '公子' },
+        { v1: '没有警官', v2: '蚂蚁' },
+        { v1: '没有董事', v2: '差别' },
+        { v1: '没有胡同', v2: '官员' },
+        { v1: '没有回声', v2: '总管' },
+        { v1: '没有律师', v2: '春风' },
+        { v1: '没有商人', v2: '学问' },
+        { v1: '没有堡垒', v2: '楼房' },
+        { v1: '没有警察', v2: '花卉' },
+        { v1: '没有法师', v2: '花园' },
+        { v1: '没有贵族', v2: '树林' },
+        { v1: '没有法官', v2: '绿地' },
+        { v1: '没有总督', v2: '公寓' },
+        { v1: '没有海峡', v2: '实话' },
+        { v1: '没有皮包', v2: '童年' },
+        { v1: '不是没有眼光', v2: '要害' },
+        { v1: '不是没有岸边', v2: '悬崖' },
+        { v1: '不是没有子弹', v2: '判决' },
+        { v1: '不是没有警卫', v2: '野心' },
+        { v1: '不是没有男人', v2: '对手' },
+        { v1: '不是没有外商', v2: '隐私' },
+        { v1: '不是没有鼠标', v2: '烈火' },
+        { v1: '不是没有园区', v2: '廉价' },
+        { v1: '不是没有局长', v2: '性命' },
+        { v1: '不是没有弹头', v2: '狮子' },
+        { v1: '不是没有高层', v2: '激情' },
+        { v1: '不是没有山洞', v2: '婚事' },
+        { v1: '不是没有君主', v2: '宝石' },
+        { v1: '不是没有战车', v2: '正气' },
+        { v1: '不是没有风浪', v2: '声誉' },
+        { v1: '不是没有校长', v2: '笑话' },
+        { v1: '不是没有老外', v2: '伴侣' },
+        { v1: '不是没有会员', v2: '情侣' },
+        { v1: '不是没有老总', v2: '美人' },
+        { v1: '不是没有皇上', v2: '珠宝' },
+    ];
+
+    var testproc = {
+        timeline_variables: test_timeline_variables,
+        soatime: soatime,
+        timeline: [
+            {
+                type: jsPsychHtmlKeyboardResponse,
+                choices: "NO_KEYS",
+                stimulus: "<p style='text-align:center; font-size:80px;'>+</p>",
+                trial_duration: 500
+            },
+            {
+                type: jsPsychImageKeyboardResponse,
+                choices: "NO_KEYS",
+                stimulus: 'blanck/blanck.png',
+                trial_duration: 200
+            },
+            {
+                //triger0
+                type: jsPsychHtmlKeyboardResponse,
+                choices: "NO_KEYS",
+                stimulus: jsPsych.timelineVariable('v1'),
+                trial_duration: 200
+            },
+            {
+                //target0
+                type: jsPsychHtmlButtonResponse,
+                choices: ['消极', '积极'],
+                stimulus: jsPsych.timelineVariable('v2'),
+            },
+        ],
+        randomize_order: true,
+        repetitions: 1
+    };
+    timeline.push(testproc)
+
+    var endinstruction = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: `
+    <p>实验结束了，谢谢参与！</p>
+
+  `,
+        choices: ['结束'],
+        trial_duration: 2000,
+
+    };
+    timeline.push(endinstruction)
+
+    //BFP结束
+
+    jsPsych.run(timeline);
+
+</script>
+</html>
