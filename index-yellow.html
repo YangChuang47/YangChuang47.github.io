@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    
+    <div style="width :50%;margin :auto;" >
+        <p id="myText" >请按按钮复制实验链接，然后在浏览器里打开</p>
+        <button class="btn" onclick="copyContent()">复制实验链接</button>
+    </div>
+    
+
+    <script>
+        let text = 'https://YangChuang47.github.io/amp soa=300.html';
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+    </script>
+
+</body>
+</html>
