@@ -1,0 +1,11 @@
+﻿body {
+
+}
+
+p {
+    font-size: min(3vw,3vh);
+}
+
+#jspsych-content {
+    font-size: min(6vw,6vh);
+}
